@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="p-5">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Coin</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">Today's Price ($)</th>
+            <th scope="col">% Change</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+        {% for coin in coins %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{coin.name}}</td>
+            <td>{{coin.symbol}}</td>
+            <td>{{coin.price}}</td>
+            <td>{{coin.change}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+       
+    </table>
+</div>
+
+
+
+
+
+{% endblock content %}

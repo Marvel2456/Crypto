@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
+    'pages.apps.PagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,10 @@ DATABASES = {
 }
 
 
+# EMAIL SETTINGS
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -118,7 +123,7 @@ USE_TZ = True
 
 STATIC_ROOT = BASE_DIR/ 'staticfiles'
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR/ 'static']
+STATICFILES_DIRS = [BASE_DIR/ 'cryptoU/static']
 
 
 # Default primary key field type
