@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row py-5">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card border-0">
+            <div class="card-body">
+                <div class="card-title py-3">
+                    <p class="py-3">Welcome {{user.username}}</p>
+                </div>
+
+                {% for wallet in wallet %}
+                <div class="card-title py-3">
+                    <p class="py-3">{{wallet.portfolio_value}}</p>
+                    <p class="py-3">{{wallet.cryptos}}</p>
+                </div>
+                {% endfor %}
+
+                {% for items in items %}
+                <div class="card-title py-3">
+                    {% comment %} <p class="py-3">{{wallet.portfolio_value}}</p> {% endcomment %}
+                    <p class="py-3">{{items.cryptos}}</p>
+                </div>
+                {% endfor %}
+                
+            </div>
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">More</button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                ...
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock content %}

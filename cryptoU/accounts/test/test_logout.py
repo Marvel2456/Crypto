@@ -9,6 +9,8 @@ User = get_user_model()
 
 class LogoutTest(TestCase):
 
+# Dummy data to test the logout
+
     def setUp(self) -> None:
         self.username = "testuser12"
         self.email = "test12@crypto.com"
@@ -27,7 +29,7 @@ class LogoutTest(TestCase):
 
         self.assertTrue('_auth_user_id' in self.client.session)
 
-        # Make a request to remove the session
+        # Here i made a request to remove the session
 
         response = self.client.get(reverse('logout'))
 

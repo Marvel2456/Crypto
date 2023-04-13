@@ -45,7 +45,7 @@ class LoginTest(TestCase):
 
         response = self.client.post(reverse('login'), user_data)
 
-        self.assertRedirects(response, reverse('homepage'))
+        self.assertRedirects(response, reverse('dashboard'))
 
 
    

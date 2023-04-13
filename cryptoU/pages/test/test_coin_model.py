@@ -9,7 +9,7 @@ from http import HTTPStatus
 
 class CoinModelTest(TestCase):
 
-# Test to assertain the count model exists 
+# Test to assertain the coin model exists 
 
     def test_coin_model_exists(self):
         coin = Coin.objects.count()
