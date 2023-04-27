@@ -9,15 +9,15 @@ from .models import *
 
 
 def register_user(request):
-    wallet_id = request.session.get('ref_wallet')
+    portfolio_id = request.session.get('ref_wallet')
     form = UserRegistrationForm(request.POST)
 
     if form.is_valid():
-        if wallet_id is not None:
-            recommended_by_profile = Wallet.objects.get(id=wallet_id)
+        if portfolio_id is not None:
+            recommended_by_profile = Portfolio.objects.get(id=portfolio_id)
             instance = form.save()
             registered_user = User.objects.get(id=instance.id)
-            registered_profile = Wallet.objects.get(user=registered_user)
+            registered_profile = Portfolio.objects.get(user=registered_user)
             registered_profile.recommended_by = recommended_by_profile.user
             registered_profile.save()
         else:
@@ -39,7 +39,7 @@ def referral_signup(request, referral_link):
         user = form.save(commit=False)
         user.referred_by = referring_user
         user.save()
-        Wallet.objects.create(user=user)
+        Portfolio.objects.create(user=user)
         referring_user.balance += 10.0  # add bonus points
         referring_user.save()
         return redirect('home')
@@ -74,12 +74,11 @@ def login_view(request):
 
 def dashboard_view(request):
     
-    wallet = Wallet.objects.all().filter(user = request.user)
+    portfolio = Portfolio.objects.all().filter(user = request.user)
 
 
     context = {
-        'wallet':wallet,
-        # 'items':items
+        'portfolio':portfolio,
     }
     return render(request, 'accounts/dashboard.html', context)
 

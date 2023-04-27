@@ -19,7 +19,7 @@ def home(request):
             }
         )
 
-    coins = Coin.objects.all()[:10]
+    coins = Coin.objects.all()
     context = {
         'coins':coins
     }

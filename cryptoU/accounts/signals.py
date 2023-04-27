@@ -1,17 +1,22 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from .models import Wallet
+from .models import Portfolio
 
 @receiver(post_save, sender=User)
-def create_wallet(sender, instance, created, *args, **kwargs):
+def create_portfolio(sender, instance, created, **kwargs):
 
     if created:
-        Wallet.objects.create(user=instance)
+        user = instance
+        portfolio = Portfolio.objects.create(
+            user = user,
+            username = user.username,
+            email = user.email,
+        )
 
 
-@receiver(post_save, sender=User)
-def update_wallet(sender, instance, created, *args, **kwargs):
+# @receiver(post_save, sender=User)
+# def update_portfolio(sender, instance, created, **kwargs):
 
-    if created == False:
-        instance.wallet.save()
+#     if created == False:
+#         instance.wallet.save()
