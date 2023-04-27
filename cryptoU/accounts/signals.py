@@ -15,8 +15,7 @@ def create_portfolio(sender, instance, created, **kwargs):
         )
 
 
-# @receiver(post_save, sender=User)
-# def update_portfolio(sender, instance, created, **kwargs):
+@receiver(post_save, sender=Portfolio)
+def update_portfolio(sender, instance, created, **kwargs):
 
-#     if created == False:
-#         instance.wallet.save()
+    pass

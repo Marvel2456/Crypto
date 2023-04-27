@@ -9,35 +9,56 @@
                 <div class="card-title py-3">
                     <p class="py-3">Welcome {{user.username}}</p>
                 </div>
-
-                {% for wallet in wallet %}
+                
+                {% comment %} <div class="card-title py-3 col-4">
+                    <p class="py-3"><b>Total reffered users</b> ${{portfolio.get_total_value}}</p>
+                </div> {% endcomment %}
                 <div class="card-title py-3">
-                    <p class="py-3">{{wallet.portfolio_value}}</p>
-                    <p class="py-3">{{wallet.cryptos}}</p>
+                    <p>Reffer a friend and get rewarded</p>
+                    <input type="text" value="https://localhost:8000/{{portfolio.referral_link}}" id="myInput">
+                    <!-- The button used to copy the text -->
+                    <button onclick="myFunction()">Copy link</button>
                 </div>
-                {% endfor %}
-
-                {% for items in items %}
                 <div class="card-title py-3">
-                    {% comment %} <p class="py-3">{{wallet.portfolio_value}}</p> {% endcomment %}
-                    <p class="py-3">{{items.cryptos}}</p>
+                    <p class="py-3"><b>Total Net worth:</b> ${{portfolio.get_total_value}}</p>
                 </div>
-                {% endfor %}
+                
                 
             </div>
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">More</button>
+            <div class="col-3">
+                <a class="btn btn-secondary" type="button" href="{% url 'wallet' %}">View Wallet</a>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">More</button>
+            </div>
+            
 
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Portfolio</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                ...
+                
             </div>
             </div>
         </div>
     </div>
     <div class="col-md-3"></div>
 </div>
+<script>
+    function myFunction() {
+        // Get the text field
+        var copyText = document.getElementById("myInput");
+      
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+      
+         // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+      
+        // Alert the copied text
+        alert("Copied the text: " + copyText.value);
+      }
+</script>
+
 {% endblock content %}

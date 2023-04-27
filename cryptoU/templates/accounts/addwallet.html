@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} Create Wallet {% endblock title %}
+
+{% block content %}
+
+<div class="row py-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="card border-0">
+            <div class="card-body">
+                <div class="card-title py-3" style="text-align: center;">
+                    <h4 class="">Create Wallet</h4>
+                </div>
+                <form action="" method="POST">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">{{field.label}}</label>
+                        {{field}}
+                    </div>
+                    {% endfor %}
+                    
+                    <input type="submit" name="Create Wallet" class="btn btn-primary">
+                </form>
+                
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<script>
+    {% comment %} var form_fields = document.getElementsByTagName('input')
+    form_fields[0].placeholder='select coin';
+    form_fields[1].placeholder='quantity';
+    
+
+    for (var field in form_fields){
+        form_fields[field].className += ' form-control'
+    } {% endcomment %}
+</script>
+
+{% endblock content %}

@@ -28,11 +28,11 @@ class Portfolio(models.Model):
     def get_recommended_profiles(self):
         qs = Portfolio.objects.all()
 
-        rec_profile = []
-        for profile in qs:
-            if profile.recommended_by == self.user:
-                rec_profile.append(profile)
-        return rec_profile
+        rec_portfolio = []
+        for portfolio in qs:
+            if portfolio.recommended_by == self.user:
+                rec_portfolio.append(portfolio)
+        return rec_portfolio
 
     def save(self, *args, **kwargs):
         if self.referral_link == "":
@@ -40,34 +40,21 @@ class Portfolio(models.Model):
             self.referral_link = referral_link
         super().save(*args, **kwargs)
 
+
+    @property
+    def get_total_value(self):
+        wallet = self.wallet_set.all()
+        totalvalue = sum([item.getvalue for item in wallet])
+        return totalvalue
+
+
 class Wallet(models.Model):
     owner = models.ForeignKey(Portfolio, on_delete=models.CASCADE, blank=True, null=True)
     coin = models.ForeignKey(Coin, on_delete=models.SET_NULL, blank=True, null=True)
     quantity = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
-    # def save(self, *args, **kwargs):
-    #     if self.link == "":
-    #         link = generate_ref_code()
-    #         self.link = link
-    #     super().save(*args, **kwargs)
-    
-    # @property
-    # def portfolio_value(self):
-    #     holdings = self.holding_set.all()
-    #     total_value = 0
-    #     for holding in holdings:
-    #         total_value = holding.value + self.balance
-    #     return total_value
-    
-# class Holding(models.Model):
-#     wallet = models.ForeignKey(Wallet, on_delete=models.CASCADE)
-#     crypto = models.ForeignKey(Coin, on_delete=models.CASCADE)
-#     quantity = models.DecimalField(max_digits=20, decimal_places=2)
-    
-#     def __str__(self):
-#         return f"{self.crypto.symbol} - {self.quantity}"
-    
-#     @property
-#     def value(self):
-#         return self.crypto.price * self.quantity
+    @property
+    def getvalue(self):
+        value = self.coin.price * self.quantity
+        return value

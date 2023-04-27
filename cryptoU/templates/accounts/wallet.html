@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} Wallet {% endblock title %}
+
+{% block content %}
+
+
+<div class="p-5">
+    <div class="col-3 py-5">
+        <a class="btn btn-outline-primary" type="button" href="{% url 'addwallet' %}">Create Wallet</a>
+    </div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Coin</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">quantity</th>
+            <th scope="col">Value($)</th>
+            <th scope="col">
+                
+            </th>
+          </tr>
+        </thead>
+        
+        <tbody>
+        {% for wallet in wallet %}
+          <tr>
+            <td>{{wallet.coin.name}}</td>
+            <td>{{wallet.coin.symbol}}</td>
+            <td>{{wallet.quantity}}</td>
+            <td>{{wallet.getvalue}}</td>
+            <td>
+                <a class="btn btn-outline-primary" type="button" href="{% url 'update_wallet' wallet.id %}">edit</a>
+                <a class="btn btn-outline-danger" type="button" href="{% url 'delete_wallet' wallet.id %}">remove</a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+       
+    </table>
+</div>
+
+
+
+
+
+{% endblock content %}

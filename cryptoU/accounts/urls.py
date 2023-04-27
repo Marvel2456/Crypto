@@ -21,4 +21,9 @@ urlpatterns = [
                     template_name = 'accounts/password_reset_complete.html'
                     ), name='password_reset_complete'),
     path('dashboard/', views.dashboard_view, name='dashboard'),
+    path('wallet/', views.walletView, name='wallet'),
+    path('create_wallet/', views.createWallet, name='addwallet'),
+    path('update_wallet/<str:pk>/', views.updateWallet, name='update_wallet'),
+    path('delete_wallet/<str:pk>/', views.deleteWallet, name='delete_wallet'),
 ]
+
