@@ -1,14 +1,12 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import get_user_model
 from django.forms import ModelForm
-from .models import Wallet, Portfolio
+from .models import Wallet, Portfolio, MyUser
 
-User = get_user_model()
 
 class UserRegistrationForm(UserCreationForm):
     
     class Meta:
-        model = User
+        model = MyUser
         fields = ['email', 'username',  'password1', 'password2']
 
 

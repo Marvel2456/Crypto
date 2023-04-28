@@ -1,20 +1,27 @@
 from django.db import models
 from pages.models import Coin
 from . utils import generate_ref_code
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 import uuid
 
 
 
 # Create your models here.
 
+class MyUser(AbstractUser):
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.username
+
+
 
 class Portfolio(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
     username = models.CharField(max_length=200, blank=True, null=True)
     email = models.CharField(max_length=200, blank=True, null=True)
     referral_link = models.CharField(max_length=12, blank=True)
-    recommended_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='ref_by')
+    recommended_by = models.ForeignKey(MyUser, on_delete=models.CASCADE, blank=True, null=True, related_name='ref_by')
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

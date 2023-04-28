@@ -17,7 +17,7 @@ def register_user(request):
         if portfolio_id is not None:
             recommended_by_profile = Portfolio.objects.get(id=portfolio_id)
             instance = form.save()
-            registered_user = User.objects.get(id=instance.id)
+            registered_user = MyUser.objects.get(id=instance.id)
             registered_profile = Portfolio.objects.get(user=registered_user)
             registered_profile.recommended_by = recommended_by_profile.user
             registered_profile.save()
