@@ -19,3 +19,8 @@ def create_portfolio(sender, instance, created, **kwargs):
 def update_portfolio(sender, instance, created, **kwargs):
 
     pass
+
+@receiver(post_save, sender=Portfolio)
+def delete_portfolio(sender, instance, created, **kwargs):
+
+    pass

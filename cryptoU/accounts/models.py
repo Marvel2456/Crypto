@@ -1,12 +1,10 @@
 from django.db import models
 from pages.models import Coin
 from . utils import generate_ref_code
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 import uuid
 
 
-
-User = get_user_model()
 
 # Create your models here.
 
